@@ -27,6 +27,7 @@ function Countdown() {
   const [minutes, setMinutes] = useState("--");
   const [seconds, setSeconds] = useState("--");
   const [isMute, setIsMute] = useState(true);
+  const [isShowTip, setIsShowTip] = useState(true);
   const videoRef = useRef(null);
 
   function updateTimes(countDownDate) {
@@ -34,8 +35,9 @@ function Countdown() {
     let distance = countDownDate - now;
 
     if (distance < 0) {
-      clearInterval(interval);
-      setMessage("开服啦!");
+      setHours("00");
+      setMinutes("00");
+      setSeconds("00");
       return;
     }
     let hours = Math.floor(distance / (1000 * 60 * 60));
@@ -59,27 +61,27 @@ function Countdown() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsShowTip(false);
+    }, 2000);
+  }, []);
+
   return (
     <>
-      <video loop ref={videoRef} className="video" src="starrail.mp4"></video>
-      {isMute ? (
-        <span
-          className="muteBtn"
-          onClick={() => {
-            videoRef.current.muted = false;
-            videoRef.current.play();
-            setIsMute(false);
-          }}
-        >
-          ▶︎
-        </span>
-      ) : (
-        <div className="countdown">
-          <TimeCountdown hours={hours} minutes={minutes} seconds={seconds} />
-          <TimeCountdown hours={hours} minutes={minutes} seconds={seconds} />
-          <p className="message">COMING SOON</p>
-        </div>
-      )}
+      <video autoPlay muted loop ref={videoRef} className="video" src="starrail.mp4"></video>
+      {isShowTip && <p className="tip">提示：点击任意位置切换取消静音/静音</p>}
+      <div
+        className="countdown"
+        onClick={() => {
+          videoRef.current.muted = !isMute;
+          setIsMute(!isMute);
+        }}
+      >
+        <TimeCountdown hours={hours} minutes={minutes} seconds={seconds} />
+        <TimeCountdown hours={hours} minutes={minutes} seconds={seconds} />
+        <p className="message">COMING SOON</p>
+      </div>
     </>
   );
 }
