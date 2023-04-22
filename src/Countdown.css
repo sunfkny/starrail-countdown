@@ -22,12 +22,27 @@
   justify-content: center;
   align-items: center;
   color: rgba(255, 255, 255, 0.8);
-  mix-blend-mode: overlay;
+}
+
+.hours,
+.minutes,
+.seconds,
+.colon {
   font-size: 15vw;
+  margin: 0;
+  mix-blend-mode: overlay;
 }
 
 .colon{
   margin-right: 1.5rem;
+}
+
+.timeName{
+  text-align: left;
+  margin: 0;
+  margin-top: -2rem;
+  font-size: 1.5vw;
+  letter-spacing: 1.2rem;
 }
 
 .message {

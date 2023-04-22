@@ -3,13 +3,22 @@ import "./Countdown.css";
 
 function TimeCountdown(props) {
   return (
-    <span className="time">
-      <span className="hours">{props.hours}</span>
-      <span className="colon">:</span>
-      <span className="minutes">{props.minutes}</span>
-      <span className="colon">:</span>
-      <span className="seconds">{props.seconds}</span>
-    </span>
+    <div className="time">
+      <div>
+        <p className="hours">{props.hours}</p>
+        <p className="timeName">HOUR</p>
+      </div>
+      <p className="colon">:</p>
+      <div>
+        <p className="minutes">{props.minutes}</p>
+        <p className="timeName">MINUTE</p>
+      </div>
+      <p className="colon">:</p>
+      <div>
+        <p className="seconds">{props.seconds}</p>
+        <p className="timeName">SECOND</p>
+      </div>
+    </div>
   );
 }
 
